@@ -3,16 +3,16 @@ from search_art import LoadInfo
 import codecs
 import sys
 
-def load(client, article, ID=62000, name='Andreichuk', date='01.07.2021', mode='doi', _output= None, _input = None):
+class space_in:
+    def write(self, text):
+        sys.stdout.write(str(text)+'\n')
+        
+def load(client, article, ID, name, date, mode, _output= None, _input = None):
     if _output:
         tim= _output
     else:
-        tim = sys.stdout
-    if _input:
-        tims = _input
-    else:
-        tims = sys.stdin
-    loader = LoadInfo(article, ID, name, date, mode, _output, _input)
+        tim = space_in()
+    loader = LoadInfo(article, ID, name, date, mode, tim, _input)
     scp_id = loader.load_data_scopus(client)
     if scp_id == None:
         return 0
@@ -24,7 +24,7 @@ def load(client, article, ID=62000, name='Andreichuk', date='01.07.2021', mode='
         loader.load_title()
     
     except:
-        tim.write("Possiibly, you are not connected to SCOPUS")
+        tim.write("Вероятно, отсутствует подключение к SCOPUS")
         return -1
     try:
         loader.load_journal()
@@ -64,7 +64,7 @@ def load(client, article, ID=62000, name='Andreichuk', date='01.07.2021', mode='
     try:
         loader.last_fields()
     except:
-        tim.write(f'ПРЕДУПРЕЖДЕНИЕ! Не удалось загрузить U6 для "{loader.article}"') 
+        tim.write(f'\nПРЕДУПРЕЖДЕНИЕ! Не удалось загрузить U6 для "{loader.article}"') 
     
     
     

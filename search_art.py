@@ -1,14 +1,18 @@
+# -*- coding: utf-8 -*-
 from elsapy.elssearch import ElsSearch
 from elsapy.elsdoc import AbsDoc
 import re
 import sys
 from pymed import PubMed
+import pandas as pd
+from elsapy.utils import recast_df
 
 ## попробовать грузить инфу с помощью requests и html (beautifulsoup)
 fields = ['ID', 'TH', 'AU', 'TI', 'JN', 'PY', 'VL', 'PG', 'RL', 'EA', 'AD',
           'AB', 'ST1', 'ST2', 'ST3', 'SL', 'AG', 'MF', 'NMRH', 'NMRC', 'NMRT', 'NMRS',
           'SO', 'KD', 'OTI', 'DSS', 'HO', 'NC', 'CC', 'MT', 'BA', 'EI', 'BG', 'SY', 
           'KW', 'NT', '3D', 'RR', 'DB', 'TAX', 'U1', 'U2', 'U3', 'U4', 'U5', 'U6']
+
 class LoadInfo:
     def __init__(self, article, ID, name, data, mode, _output = None, _input = None):
         self.template = {field : '' for field in fields}
@@ -21,10 +25,7 @@ class LoadInfo:
         self.DOI = None
         self.mode = mode
         self.counter = 0
-        if _output:
-            self.tim = _output
-        else:
-            self.tim = sys.stdout
+        self.tim = _output
         if _input:
             self.tims = _input
         else:
@@ -47,7 +48,7 @@ class LoadInfo:
                         self.tim.write(f'Не найдено ни одной статьи для "{self.article}".')
                         return
                 elif len(result) >= 20:
-                    self.tim.write(f'Найдено больше 20 статей для "{self.article}". Скорее всего, назние неспецифично, используйте DOI.')
+                    self.tim.write(f'Найдено больше 20 статей для "{self.article}". Скорее всего, название неспецифично, используйте DOI.')
                     return
                 else:
                     if len(result) > 1:

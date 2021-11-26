@@ -6,10 +6,10 @@ import codecs
 
 def main():
     myparser = argparse.ArgumentParser()
-    myparser.add_argument('-f', '--filepath', type=str, default = '', help='input file in .txt format containing list of articles')
-    myparser.add_argument('-id', '--id', type=int, default=62000, help='starting ID')
-    myparser.add_argument('-n', '--name', type=str, default='Andreichuk', help='your name for U1 field')
-    myparser.add_argument('-d', '--date', type=str, default='01.07.2021', help="data for U2 field in format 'dd.mm.yyyy'")
+    myparser.add_argument('-f', '--filepath', type=str, default = 'input.txt', help='input file in .txt format containing list of articles')
+    myparser.add_argument('-id', '--id', type=int, default=1, help='starting ID')
+    myparser.add_argument('-n', '--name', type=str, default='Dow', help='your name for U1 field')
+    myparser.add_argument('-d', '--date', type=str, default='01.01.2021', help="data for U2 field in format 'dd.mm.yyyy'")
     myparser.add_argument('-m', '--mode', type=str, default='name', help='mode of search, possible options: name, doi')
     myparser.add_argument('-names', '--names', type = list, default = '')
     myparser.add_argument('-t', '--target', type = str, default = '.')

@@ -123,7 +123,7 @@ class Activity(Ui_Dialog):
     def Compose(self):
         self.name = self.lineEdit.text()
         if not self.name:
-            self.name = 'John Dow'
+            self.name = 'Dow'
         self.date = self.lineEdit_2.text()
         if not self.date:
             date = datetime.date.today()
@@ -209,12 +209,8 @@ class Activity(Ui_Dialog):
         self.thread.finished.connect(self.thread.deleteLater)
         self.worker.output.textWritten.connect(self.reportProgress)
         self.worker.finished.connect(self.reportFinished)
-       
-        #self.pushButton_6.clicked.connect(self.sendval)
-        #self.lineEdit_5.returnPressed.connect(self.sendval)
-
         self.thread.start()
-        # добавить прокручивание окна textBrowser_4
+
         
     def sendval(self):
         val = self.lineEdit_5.text()
